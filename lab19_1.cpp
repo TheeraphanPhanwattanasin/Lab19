@@ -20,20 +20,51 @@ string toUpperStr(string x){
     return y;
 }
 
-void importDataFromFile(){
+void importDataFromFile(string filename, vector<string> names, vector<int> scores, vector<char> grades){
+     ifstream source;
+     source.open("filename");
+     string info;
+     int i=0; 
 
+
+
+     while(getline(source,info)){
+        char format[] = "%[^:]: %d %d %d";
+        char textname[100];
+        int a,b,c;
+
+        sscanf(info.c_str(),format, textname,&a,&b,&c);
+        names[i] = textname;
+        scores[i] = a+b+c;
+        grades[i] = score2grade(a+b+c);
+
+        i++;
+     }
 }
 
-void getCommand(){
-
+void getCommand(string command,string key){
+cout << "Please input your command: ";
+cin >> command;
+cin >> key;
 }
 
-void searchName(){
-
+void searchName(vector<string> names, vector<int> scores, vector<char> grades){
+cout << "---------------------------------\n";
+for(int i=0; i < names.size(); i++){
+if(key == toUpperStr(names[i]))
+cout << name[i] << "'s score = " << scores[i] << "\n";
+cout << name[i] << "'s grade = " << grades[i] << "\n";
+}
+cout << "---------------------------------\n";
 }
 
-void searchGrade(){
-
+void searchGrade(vector<string> names, vector<int> scores, vector<char> grades){
+cout << "---------------------------------\n";
+for(int i=0; i < names.size(); i++){
+if(key == toUpperStr(grades[i]))
+cout << names[i] << " (" << scores[i] << ")\n"
+}
+cout << "---------------------------------\n";
 }
 
 
@@ -49,14 +80,14 @@ int main(){
         getCommand(command,key);
         command = toUpperStr(command);
         key = toUpperStr(key);
-        if(command == "EXIT") break;
+        *if(command == "EXIT") break;
         else if(command == "GRADE") searchGrade(names, scores, grades, key);
         else if(command == "NAME") searchName(names, scores, grades, key);
         else{
             cout << "---------------------------------\n";
             cout << "Invalid command.\n";
             cout << "---------------------------------\n";
-        }
+        }*/
     }while(true);
     
     return 0;
